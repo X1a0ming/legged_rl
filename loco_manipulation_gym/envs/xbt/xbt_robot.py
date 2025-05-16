@@ -152,6 +152,7 @@ class XbT(LeggedRobot):
         self.last_dof_vel[:] = self.dof_vel[:]
         self.last_root_vel[:] = self.root_states[:, 7:13]
 
+        # self.debug_viz = True
         if self.viewer and self.enable_viewer_sync and self.debug_viz:
             self._draw_debug_vis()
 
@@ -907,7 +908,7 @@ class XbT(LeggedRobot):
 
     def _reward_dof_vel(self):
         # Penalize dof velocities
-        self.dof_vel[:,self.wheel_indices] = 0
+        # self.dof_vel[:,self.wheel_indices] = 0
         return torch.sum(torch.square(self.dof_vel), dim=1)
     
     def _reward_dof_acc(self):

@@ -127,7 +127,7 @@ class XbTCfg( LeggedRobotCfg ):
         soft_dof_pos_limit = 0.9 # percentage of urdf limits, values above this limit are penalized
         soft_dof_vel_limit = 0.9
         soft_torque_limit = 1.
-        base_height_target = 0.35 # [m]
+        base_height_target = 0.375 # [m]
         max_contact_force = 100. # forces above this value are penalized
 
     class control( LeggedRobotCfg.control ):
@@ -141,18 +141,18 @@ class XbTCfg( LeggedRobotCfg ):
         decimation = 4
 
     class domain_rand( LeggedRobotCfg.domain_rand ):
-        randomize_friction = False
+        randomize_friction = True
         friction_range = [0.1, 2.0]
-        randomize_base_mass = False
-        added_mass_range = [-0.4, 0.4]
-        push_robots = False
-        push_interval_s = 3
+        randomize_base_mass = True
+        added_mass_range = [-0.5, 0.5]
+        push_robots = True
+        push_interval_s = 5
         max_push_vel_xy = 0.2
         max_push_ang_vel = 0.2
 
-        randomize_base_com = False
+        randomize_base_com = True
         added_com_range = [-0.15, 0.15]
-        randomize_motor = False
+        randomize_motor = True
         motor_strength_range = [0.8, 1.2]
 
         action_delay = 0.1
@@ -164,8 +164,9 @@ class XbTCfg( LeggedRobotCfg ):
         arm_name = ""
         foot_name = "foot"
         wheel_name =["foot"]
-        penalize_contacts_on = ["thigh", "calf","base"]
-        terminate_after_contacts_on = ["base"]
+        penalize_contacts_on = ["thigh", "calf", "base"]
+        # terminate_after_contacts_on = ["thigh","base"]
+        terminate_after_contacts_on = ["thigh","base"]
         self_collisions = 0 # 1 to disable, 0 to enable...bitwise filter "base","calf","hip","thigh"
         replace_cylinder_with_capsule = False
         flip_visual_attachments = True
@@ -185,7 +186,7 @@ class XbTCfgPPO( LeggedRobotCfgPPO ):
         num_steps_per_env = 48 # per iteration
         max_iterations = 3000
         # load_run = '/path/to/pretrained_model'
-        load_run = None
-        checkpoint = 0
+        load_run = -1
+        checkpoint = -1
 
   
